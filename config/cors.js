@@ -39,6 +39,10 @@ module.exports.cors = {
   // Allow cookies to be shared for CORS requests?
   credentials: true,
 
+  // And acknowledge that setting origin to '*' and credentials to true
+  // is not good for security
+  allowAnyOriginWithCredentialsUnsafe: true,
+
   // Which methods should be allowed for CORS requests?  This is only used
   // in response to preflight requests (see article linked above for more info)
   methods: 'GET, POST, PUT, DELETE, OPTIONS, HEAD',
