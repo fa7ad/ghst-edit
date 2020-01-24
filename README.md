@@ -18,3 +18,15 @@ The original attempt to extract out editor from [Ghost]() was done by [Tim Badol
 ### Demo
 
 Live demo can be found [here](http://ghosditor.herokuapp.com/) with image upload and image placeholder. Its a [node.js](http://nodejs.org/) app built over [sails.js](http://sailsjs.org/).
+
+### Getting started
+
+```
+npm install
+grunt
+node app.js
+```
+
+Note: you may have to install grunt-cli globally in order to run grunt. The
+grunt command will run a set of tasks, including grunt copy, to set up the
+server.
