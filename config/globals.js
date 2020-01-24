@@ -9,8 +9,8 @@
  * http://links.sailsjs.org/docs/config/globals
  */
 module.exports.globals = {
-	_: true,
-	async: true,
+	_: require('lodash'),
+	async: require('async'),
 	sails: true,
 	services: true,
 	models: true
