@@ -20,7 +20,6 @@ module.exports.http = {
       'cookieParser',
       'session',
       'bodyParser',
-      'handleBodyParserError',
       'compress',
       'methodOverride',
       'poweredBy',
