@@ -24,9 +24,7 @@ module.exports.http = {
       '$custom',
       'router',
       'www',
-      'favicon',
-      '404',
-      '500'
+      'favicon'
     ],
 
     // The body parser that will handle incoming multipart HTTP requests.
