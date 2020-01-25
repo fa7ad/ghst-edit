@@ -30,3 +30,15 @@ node app.js
 Note: you may have to install grunt-cli globally in order to run grunt. The
 grunt command will run a set of tasks, including grunt copy, to set up the
 server.
+
+### Implementation notes
+
+ghostdown.js appears to be a combination of:
+
+* codemirror.js - CodeMirror version 3.15
+* showdown.js - A javascript port of Markdown by John Fraser
+* an immediately invoked function expression that does setup for the above
+
+It looks like it is from https://github.com/timsayshey/Ghost-Markdown-Editor
+which ghosditor is based on.
+
