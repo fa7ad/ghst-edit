@@ -16,7 +16,6 @@ module.exports.http = {
     // The order in which middleware should be run for HTTP request.
     // (the Sails router is invoked by the "router" middleware below.)
     order: [
-      'startRequestTimer',
       'cookieParser',
       'session',
       'bodyParser',
