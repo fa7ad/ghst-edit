@@ -17,6 +17,9 @@ This implementation of ghosditor is based on [the work of
 durgesh-priyaranjan](https://github.com/durgesh-priyaranjan/ghosditor). All 
 dependencies have been updated to current, as of Jan 2020. 
 
+[[https://github.com/timsayshey/Ghost-Markdown-Editor/issues/7][Ghost-Markdown-Editor
+- issue 7]]
+
 The original attempt to extract out editor from [Ghost]() was done by [Tim Badolato](https://github.com/timsayshey) which can be found [here](https://github.com/timsayshey/Ghost-Markdown-Editor).
 
 
