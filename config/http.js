@@ -21,7 +21,6 @@ module.exports.http = {
       'session',
       'bodyParser',
       'compress',
-      'methodOverride',
       'poweredBy',
       '$custom',
       'router',
