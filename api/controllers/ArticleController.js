@@ -12,37 +12,55 @@ var uuid = require('node-uuid'),
 var exec = require( 'child_process' ).exec;
 var path = __dirname + '/../../media';
 
-
+/*
 timeplan.repeat({
     period: "10m",
     task: function() {
+        console.log('rm -r ' + path);
         exec( 'rm -r ' + path, function ( err, stdout, stderr ){
         });
     }
 });
-
+*/
 
 module.exports = {
 
 
     imageUpload: function(req, res) {
+        return req.file('file')
+        .upload(function onUploadComplete(err, uploadedFiles) {
+            if(err) {
+                console.log('upload failed with: ', err);
+                throw err;
+            }
 
-        var imgName = uuid.v1(),
-            relativePath = './media/' + imgName + ".png",
-            absolutePath = __dirname + '/../../media/' + imgName + ".png";
+            if(uploadedFiles.length !== 1) {
+                throw new Error(
+                    'wrong number of files uploaded: ' +
+                    uploadedFiels.length
+                );
+            }
 
-        return req.file('file').upload(relativePath, function onUploadComplete(err, uploadedFiles) {
+            let meta = uploadedFiles[0];
 
-            im.convert([absolutePath, '-resize', '600', absolutePath],
+            let filename =
+                new String(meta.fd).substring(meta.fd.lastIndexOf('/') + 1);
+
+            let finalPath =
+                req._sails.config.paths.public + '/media/' + filename;
+
+            im.convert(
+                [meta.fd, '-resize', '600', finalPath],
                 function(err, stdout) {
                     if (err) throw err;
 
                     res.json({
                         type: "success",
-                        id: imgName,
-                        path: "/media/" + imgName + ".png"
+                        id: filename,
+                        path: "/media/" + filename
                     });
-                });
+                }
+            );
         });
     }
 };
