@@ -1,53 +1,53 @@
-/**
- * app.js
- *
- * Use `app.js` to run your app without `sails lift`.
- * To start the server, run: `node app.js`.
- * 
- * This is handy in situations where the sails CLI is not relevant or useful.
- *
- * For example:
- *   => `node app.js`
- *   => `forever start app.js`
- *   => `node debug app.js`
- *   => `modulus deploy`
- *   => `heroku scale`
- * 
- *
- * The same command-line arguments are supported, e.g.:
- * `node app.js --silent --port=8000 --prod`
- */
+import got from 'got';
+import path from 'path';
+import multer from 'multer';
+import express from 'express';
+import bodyParser from 'body-parser';
+import { FormData, Blob } from 'formdata-node';
 
-// Ensure a "sails" can be located:
-var sails;
-try {
-	sails = require('sails');
-} catch (e) {
-	console.error('To run an app using `node app.js`, you usually need to have a version of `sails` installed in the same directory as your app.');
-	console.error('To do that, run `npm install sails`');
-	console.error('');
-	console.error('Alternatively, if you have sails installed globally (i.e. you did `npm install -g sails`), you can use `sails lift`.');
-	console.error('When you run `sails lift`, your app will still use a local `./node_modules/sails` dependency if it exists,');
-	console.error('but if it doesn\'t, the app will run with the global sails instead!');
-	return;
+const PORT = process.env.PORT || 3000;
+const IMGBB_APIKEY = process.env.IMGBB_APIKEY;
+if (!IMGBB_APIKEY) {
+  throw new Error('IMGBB_APIKEY is not set');
 }
 
-// Try to get `rc` dependency
-var rc;
-try {
-	rc = require('rc');
-} catch (e0) {
-	try {
-		rc = require('sails/node_modules/rc');
-	} catch (e1) {
-		console.error('Could not find dependency: `rc`.');
-		console.error('Your `.sailsrc` file(s) will be ignored.');
-		console.error('To resolve this, run:');
-		console.error('npm install rc --save');
-		rc = function () { return {}; };
-	}
-}
+const app = express();
+const upload = multer({ storage: multer.memoryStorage() });
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static(path.join(process.cwd(), 'public')));
 
-// Start server
-sails.lift(rc('sails'));
+app.post('/upload', upload.single('file'), async (req, res) => {
+  try {
+    const { file } = req;
+    if (!file) {
+      throw new Error('No file uploaded');
+    }
+    const { originalname, buffer } = file;
+
+    const formData = new FormData();
+    formData.append('image', new Blob([buffer]), originalname);
+
+    const response = await got
+      .post('https://api.imgbb.com/1/upload', {
+        searchParams: {
+          key: IMGBB_APIKEY,
+        },
+        body: formData,
+      })
+      .json();
+    res.json({
+      id: response.data.id,
+      type: 'success',
+      path: response.data.url,
+    });
+  } catch (error) {
+    console.log(error.response || error.body || error);
+    res.status(500).send(error.message);
+  }
+});
+
+app.listen(PORT, () => {
+  console.log(`Server is running on http://0.0.0.0:${PORT}`);
+});
