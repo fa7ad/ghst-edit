@@ -1,15 +1,10 @@
-import got from 'got';
 import path from 'path';
 import multer from 'multer';
 import express from 'express';
 import bodyParser from 'body-parser';
-import { FormData, Blob } from 'formdata-node';
+import { uploadImage } from './lib/uploadImage';
 
 const PORT = process.env.PORT || 3000;
-const IMGBB_APIKEY = process.env.IMGBB_APIKEY;
-if (!IMGBB_APIKEY) {
-  throw new Error('IMGBB_APIKEY is not set');
-}
 
 const app = express();
 const upload = multer({ storage: multer.memoryStorage() });
@@ -24,27 +19,15 @@ app.post('/upload', upload.single('file'), async (req, res) => {
     if (!file) {
       throw new Error('No file uploaded');
     }
-    const { originalname, buffer } = file;
-
-    const formData = new FormData();
-    formData.append('image', new Blob([buffer]), originalname);
-
-    const response = await got
-      .post('https://api.imgbb.com/1/upload', {
-        searchParams: {
-          key: IMGBB_APIKEY,
-        },
-        body: formData,
-      })
-      .json();
+    const { id, url } = await uploadImage(file);
     res.json({
-      id: response.data.id,
+      id,
       type: 'success',
-      path: response.data.url,
+      path: url,
     });
   } catch (error) {
-    console.log(error.response || error.body || error);
-    res.status(500).send(error.message);
+    console.error(error);
+    res.status(400).send(error.message);
   }
 });
 
