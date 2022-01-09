@@ -79,7 +79,7 @@ window.CodeMirror = (function () {
       suppressEdits: false,
       pasteIncoming: false,
       draggingText: false,
-      highlight: new Delayed(),
+      highlight: new Delayed()
     };
 
     themeChanged(this);
@@ -415,7 +415,7 @@ window.CodeMirror = (function () {
     var bottom = Math.ceil(top + height);
     return {
       from: lineAtHeight(doc, top),
-      to: lineAtHeight(doc, bottom),
+      to: lineAtHeight(doc, bottom)
     };
   }
 
@@ -515,8 +515,8 @@ window.CodeMirror = (function () {
       changes = [
         {
           from: doc.first,
-          to: doc.first + doc.size,
-        },
+          to: doc.first + doc.size
+        }
       ];
     var gutterW = (display.sizer.style.marginLeft = display.gutters.offsetWidth + 'px');
     display.scrollbarH.style.left = cm.options.fixedGutter ? gutterW : '0';
@@ -545,8 +545,8 @@ window.CodeMirror = (function () {
     var intact = [
       {
         from: Math.max(display.showingFrom, doc.first),
-        to: Math.min(display.showingTo, end),
-      },
+        to: Math.min(display.showingTo, end)
+      }
     ];
     if (intact[0].from >= intact[0].to) intact = [];
     else intact = computeIntact(intact, changes);
@@ -649,7 +649,7 @@ window.CodeMirror = (function () {
         if (change.to <= range.from && change.diff) {
           intact2.push({
             from: range.from + diff,
-            to: range.to + diff,
+            to: range.to + diff
           });
         } else if (change.to <= range.from || change.from >= range.to) {
           intact2.push(range);
@@ -657,12 +657,12 @@ window.CodeMirror = (function () {
           if (change.from > range.from)
             intact2.push({
               from: range.from,
-              to: change.from,
+              to: change.from
             });
           if (change.to < range.to)
             intact2.push({
               from: change.to + diff,
-              to: range.to + diff,
+              to: range.to + diff
             });
         }
       }
@@ -684,7 +684,7 @@ window.CodeMirror = (function () {
       gutterTotalWidth: d.gutters.offsetWidth,
       gutterLeft: left,
       gutterWidth: width,
-      wrapperWidth: d.wrapper.clientWidth,
+      wrapperWidth: d.wrapper.clientWidth
     };
   }
 
@@ -993,7 +993,7 @@ window.CodeMirror = (function () {
       });
       return {
         start: start,
-        end: end,
+        end: end
       };
     }
 
@@ -1061,7 +1061,7 @@ window.CodeMirror = (function () {
             changed.push(
               (prevChange = {
                 start: doc.frontier,
-                end: doc.frontier + 1,
+                end: doc.frontier + 1
               })
             );
         }
@@ -1154,7 +1154,7 @@ window.CodeMirror = (function () {
       left: pos < ch ? r.right : r.left,
       right: pos > ch ? r.left : r.right,
       top: r.top,
-      bottom: r.bottom,
+      bottom: r.bottom
     };
   }
 
@@ -1190,7 +1190,7 @@ window.CodeMirror = (function () {
       width: cm.display.scroller.clientWidth,
       markedSpans: line.markedSpans,
       measure: measure,
-      classes: line.textClass + '|' + line.bgClass + '|' + line.wrapClass,
+      classes: line.textClass + '|' + line.bgClass + '|' + line.wrapClass
     };
     if (cache.length == 16) cache[++cm.display.measureLineCachePos % 16] = memo;
     else cache.push(memo);
@@ -1265,7 +1265,7 @@ window.CodeMirror = (function () {
         left: rect.left - outer.left,
         right: rect.right - outer.left,
         top: i,
-        bottom: null,
+        bottom: null
       };
     }
 
@@ -1376,7 +1376,7 @@ window.CodeMirror = (function () {
     var lineSpaceBox = getRect(cm.display.lineSpace);
     return {
       left: left - lineSpaceBox.left,
-      top: top - lineSpaceBox.top,
+      top: top - lineSpaceBox.top
     };
   }
 
@@ -1556,7 +1556,7 @@ window.CodeMirror = (function () {
       cursorActivity: false,
       updateMaxLine: false,
       updateScrollPos: false,
-      id: ++nextOpId,
+      id: ++nextOpId
     };
     if (!delayedCallbackDepth++) delayedCallbacks = [];
   }
@@ -1666,7 +1666,7 @@ window.CodeMirror = (function () {
     cm.curOp.changes.push({
       from: from,
       to: to,
-      diff: lendiff,
+      diff: lendiff
     });
   }
 
@@ -1732,7 +1732,7 @@ window.CodeMirror = (function () {
       from: from,
       to: to,
       text: splitLines(text.slice(same)),
-      origin: cm.state.pasteIncoming ? 'paste' : '+input',
+      origin: cm.state.pasteIncoming ? 'paste' : '+input'
     };
     makeChange(cm.doc, changeEvent, 'end');
     cm.curOp.updateInput = updateInput;
@@ -2001,7 +2001,7 @@ window.CodeMirror = (function () {
       type = 'double';
       lastDoubleClick = {
         time: now,
-        pos: start,
+        pos: start
       };
       e_preventDefault(e);
       var word = findWordAt(getLine(doc, start.line).text, start);
@@ -2009,7 +2009,7 @@ window.CodeMirror = (function () {
     } else {
       lastClick = {
         time: now,
-        pos: start,
+        pos: start
       };
     }
 
@@ -2187,7 +2187,7 @@ window.CodeMirror = (function () {
                 from: pos,
                 to: pos,
                 text: splitLines(text.join('\n')),
-                origin: 'paste',
+                origin: 'paste'
               },
               'around'
             );
@@ -2339,7 +2339,7 @@ window.CodeMirror = (function () {
       else bot = Math.min(cm.doc.height, bot + pixels + 50);
       updateDisplay(cm, [], {
         top: top,
-        bottom: bot,
+        bottom: bot
       });
     }
 
@@ -2642,25 +2642,25 @@ window.CodeMirror = (function () {
       // Assumed to be {anchor, head} object
       return {
         anchor: clipPostChange(doc, change, hint.anchor),
-        head: clipPostChange(doc, change, hint.head),
+        head: clipPostChange(doc, change, hint.head)
       };
 
     if (hint == 'start')
       return {
         anchor: change.from,
-        head: change.from,
+        head: change.from
       };
 
     var end = changeEnd(change);
     if (hint == 'around')
       return {
         anchor: change.from,
-        head: end,
+        head: end
       };
     if (hint == 'end')
       return {
         anchor: end,
-        head: end,
+        head: end
       };
 
     // hint is null, leave the selection alone as much as possible
@@ -2675,7 +2675,7 @@ window.CodeMirror = (function () {
     };
     return {
       anchor: adjustPos(doc.sel.anchor),
-      head: adjustPos(doc.sel.head),
+      head: adjustPos(doc.sel.head)
     };
   }
 
@@ -2688,7 +2688,7 @@ window.CodeMirror = (function () {
       origin: change.origin,
       cancel: function () {
         this.canceled = true;
-      },
+      }
     };
     if (update)
       obj.update = function (from, to, text, origin) {
@@ -2705,7 +2705,7 @@ window.CodeMirror = (function () {
       from: obj.from,
       to: obj.to,
       text: obj.text,
-      origin: obj.origin,
+      origin: obj.origin
     };
   }
 
@@ -2730,7 +2730,7 @@ window.CodeMirror = (function () {
         makeChangeNoReadonly(doc, {
           from: split[i].from,
           to: split[i].to,
-          text: [''],
+          text: ['']
         });
       if (split.length)
         makeChangeNoReadonly(
@@ -2738,7 +2738,7 @@ window.CodeMirror = (function () {
           {
             from: split[0].from,
             to: split[0].to,
-            text: change.text,
+            text: change.text
           },
           selUpdate
         );
@@ -2776,7 +2776,7 @@ window.CodeMirror = (function () {
       headBefore: event.headAfter,
       anchorAfter: event.anchorBefore,
       headAfter: event.headBefore,
-      generation: hist.generation,
+      generation: hist.generation
     };
     (type == 'undo' ? hist.undone : hist.done).push(anti);
     hist.generation = event.generation || ++hist.maxGeneration;
@@ -2797,7 +2797,7 @@ window.CodeMirror = (function () {
         ? computeSelAfterChange(doc, change, null)
         : {
             anchor: event.anchorBefore,
-            head: event.headBefore,
+            head: event.headBefore
           };
       makeChangeSingleDoc(doc, change, after, mergeOldSpans(doc, change));
       var rebased = [];
@@ -2841,7 +2841,7 @@ window.CodeMirror = (function () {
         from: Pos(doc.first, 0),
         to: Pos(change.to.line + shift, change.to.ch),
         text: [lst(change.text)],
-        origin: change.origin,
+        origin: change.origin
       };
     }
     var last = doc.lastLine();
@@ -2850,7 +2850,7 @@ window.CodeMirror = (function () {
         from: change.from,
         to: Pos(last, getLine(doc, last).text.length),
         text: [change.text[0]],
-        origin: change.origin,
+        origin: change.origin
       };
     }
 
@@ -2910,7 +2910,7 @@ window.CodeMirror = (function () {
         to: to,
         text: change.text,
         removed: change.removed,
-        origin: change.origin,
+        origin: change.origin
       };
       if (cm.curOp.textChanged) {
         for (var cur = cm.curOp.textChanged; cur.next; cur = cur.next) {}
@@ -2933,7 +2933,7 @@ window.CodeMirror = (function () {
         from: from,
         to: to,
         text: code,
-        origin: origin,
+        origin: origin
       },
       null
     );
@@ -3008,7 +3008,7 @@ window.CodeMirror = (function () {
   function filterSelectionChange(doc, anchor, head) {
     var obj = {
       anchor: anchor,
-      head: head,
+      head: head
     };
     signal(doc, 'beforeSelectionChange', doc, obj);
     if (doc.cm) signal(doc.cm, 'beforeSelectionChange', doc.cm, obj);
@@ -3195,7 +3195,7 @@ window.CodeMirror = (function () {
   function updateScrollPos(cm, left, top) {
     cm.curOp.updateScrollPos = {
       scrollLeft: left == null ? cm.doc.scrollLeft : left,
-      scrollTop: top == null ? cm.doc.scrollTop : top,
+      scrollTop: top == null ? cm.doc.scrollTop : top
     };
   }
 
@@ -3204,7 +3204,7 @@ window.CodeMirror = (function () {
       cm.curOp.updateScrollPos ||
       (cm.curOp.updateScrollPos = {
         scrollLeft: cm.doc.scrollLeft,
-        scrollTop: cm.doc.scrollTop,
+        scrollTop: cm.doc.scrollTop
       });
     var scroll = cm.display.scroller;
     pos.scrollTop = Math.max(0, Math.min(scroll.scrollHeight - scroll.clientHeight, pos.scrollTop + top));
@@ -3367,7 +3367,7 @@ window.CodeMirror = (function () {
     }
     return {
       from: Pos(pos.line, start),
-      to: Pos(pos.line, end),
+      to: Pos(pos.line, end)
     };
   }
 
@@ -3422,7 +3422,7 @@ window.CodeMirror = (function () {
       this.state.overlays.push({
         mode: mode,
         modeSpec: spec,
-        opaque: options && options.opaque,
+        opaque: options && options.opaque
       });
       this.state.modeGen++;
       regChange(this);
@@ -3473,7 +3473,7 @@ window.CodeMirror = (function () {
         string: stream.current(),
         className: style || null, // Deprecated, use 'type' instead
         type: style || null,
-        state: state,
+        state: state
       };
     },
 
@@ -3534,7 +3534,7 @@ window.CodeMirror = (function () {
         this,
         {
           top: height,
-          left: 0,
+          left: 0
         },
         mode || 'page'
       ).top;
@@ -3555,7 +3555,7 @@ window.CodeMirror = (function () {
           getLine(this.doc, line),
           {
             top: 0,
-            left: 0,
+            left: 0
           },
           mode || 'page'
         ).top + (end ? lineObj.height : 0)
@@ -3645,14 +3645,14 @@ window.CodeMirror = (function () {
         textClass: line.textClass,
         bgClass: line.bgClass,
         wrapClass: line.wrapClass,
-        widgets: line.widgets,
+        widgets: line.widgets
       };
     },
 
     getViewport: function () {
       return {
         from: this.display.showingFrom,
-        to: this.display.showingTo,
+        to: this.display.showingTo
       };
     },
 
@@ -3771,7 +3771,7 @@ window.CodeMirror = (function () {
         height: scroller.scrollHeight - co,
         width: scroller.scrollWidth - co,
         clientHeight: scroller.clientHeight - co,
-        clientWidth: scroller.clientWidth - co,
+        clientWidth: scroller.clientWidth - co
       };
     },
 
@@ -3830,7 +3830,7 @@ window.CodeMirror = (function () {
     },
     getGutterElement: function () {
       return this.display.gutters;
-    },
+    }
   };
   eventMixin(CodeMirror);
 
@@ -3854,7 +3854,7 @@ window.CodeMirror = (function () {
   var Init = (CodeMirror.Init = {
     toString: function () {
       return 'CodeMirror.Init';
-    },
+    }
   });
 
   // These two are, on init, called from the constructor because they
@@ -4024,12 +4024,12 @@ window.CodeMirror = (function () {
     }
     if (typeof spec == 'string')
       return {
-        name: spec,
+        name: spec
       };
     else
       return (
         spec || {
-          name: 'null',
+          name: 'null'
         }
       );
   };
@@ -4056,7 +4056,7 @@ window.CodeMirror = (function () {
     return {
       token: function (stream) {
         stream.skipToEnd();
-      },
+      }
     };
   });
   CodeMirror.defineMIME('text/plain', 'null');
@@ -4124,7 +4124,7 @@ window.CodeMirror = (function () {
     return (
       info || {
         mode: mode,
-        state: state,
+        state: state
       }
     );
   };
@@ -4185,7 +4185,7 @@ window.CodeMirror = (function () {
         cm.coordsChar(
           {
             left: cm.display.lineDiv.offsetWidth + 100,
-            top: top,
+            top: top
           },
           'div'
         )
@@ -4197,7 +4197,7 @@ window.CodeMirror = (function () {
         cm.coordsChar(
           {
             left: 0,
-            top: top,
+            top: top
           },
           'div'
         )
@@ -4291,7 +4291,7 @@ window.CodeMirror = (function () {
     },
     toggleOverwrite: function (cm) {
       cm.toggleOverwrite();
-    },
+    }
   });
 
   // STANDARD KEYMAPS
@@ -4311,7 +4311,7 @@ window.CodeMirror = (function () {
     Tab: 'defaultTab',
     'Shift-Tab': 'indentAuto',
     Enter: 'newlineAndIndent',
-    Insert: 'toggleOverwrite',
+    Insert: 'toggleOverwrite'
   };
   // Note that the save and find-related commands aren't defined by
   // default. Unknown commands are simply ignored.
@@ -4339,7 +4339,7 @@ window.CodeMirror = (function () {
     'Shift-Ctrl-R': 'replaceAll',
     'Ctrl-[': 'indentLess',
     'Ctrl-]': 'indentMore',
-    fallthrough: 'basic',
+    fallthrough: 'basic'
   };
   keyMap.macDefault = {
     'Cmd-A': 'selectAll',
@@ -4366,7 +4366,7 @@ window.CodeMirror = (function () {
     'Cmd-[': 'indentLess',
     'Cmd-]': 'indentMore',
     'Cmd-Backspace': 'delLineLeft',
-    fallthrough: ['basic', 'emacsy'],
+    fallthrough: ['basic', 'emacsy']
   };
   keyMap['default'] = mac ? keyMap.macDefault : keyMap.pcDefault;
   keyMap.emacsy = {
@@ -4385,7 +4385,7 @@ window.CodeMirror = (function () {
     'Alt-D': 'delWordAfter',
     'Alt-Backspace': 'delWordBefore',
     'Ctrl-K': 'killLine',
-    'Ctrl-T': 'transposeChars',
+    'Ctrl-T': 'transposeChars'
   };
 
   // KEYMAP DISPATCH
@@ -4590,7 +4590,7 @@ window.CodeMirror = (function () {
     },
     current: function () {
       return this.string.slice(this.start, this.pos);
-    },
+    }
   };
   CodeMirror.StringStream = StringStream;
 
@@ -4659,7 +4659,7 @@ window.CodeMirror = (function () {
     return (
       from && {
         from: from,
-        to: to,
+        to: to
       }
     );
   };
@@ -4718,11 +4718,11 @@ window.CodeMirror = (function () {
         {
           from: from,
           to: to,
-          origin: 'markText',
+          origin: 'markText'
         },
         {
           head: doc.sel.head,
-          anchor: doc.sel.anchor,
+          anchor: doc.sel.anchor
         },
         NaN
       );
@@ -4739,7 +4739,7 @@ window.CodeMirror = (function () {
       var span = {
         from: null,
         to: null,
-        marker: marker,
+        marker: marker
       };
       size += line.text.length;
       if (curLine == from.line) {
@@ -4860,7 +4860,7 @@ window.CodeMirror = (function () {
           (nw || (nw = [])).push({
             from: span.from,
             to: endsAfter ? null : span.to,
-            marker: marker,
+            marker: marker
           });
         }
       }
@@ -4878,7 +4878,7 @@ window.CodeMirror = (function () {
           (nw || (nw = [])).push({
             from: startsBefore ? null : span.from - endCh,
             to: span.to == null ? null : span.to - endCh,
-            marker: marker,
+            marker: marker
           });
         }
       }
@@ -4947,7 +4947,7 @@ window.CodeMirror = (function () {
             (gapMarkers || (gapMarkers = [])).push({
               from: null,
               to: null,
-              marker: first[i].marker,
+              marker: first[i].marker
             });
       for (var i = 0; i < gap; ++i) newMarkers.push(gapMarkers);
       newMarkers.push(last);
@@ -4990,8 +4990,8 @@ window.CodeMirror = (function () {
     var parts = [
       {
         from: from,
-        to: to,
-      },
+        to: to
+      }
     ];
     for (var i = 0; i < markers.length; ++i) {
       var mk = markers[i],
@@ -5003,12 +5003,12 @@ window.CodeMirror = (function () {
         if (posLess(p.from, m.from) || (!mk.inclusiveLeft && posEq(p.from, m.from)))
           newParts.push({
             from: p.from,
-            to: m.from,
+            to: m.from
           });
         if (posLess(m.to, p.to) || (!mk.inclusiveRight && posEq(p.to, m.to)))
           newParts.push({
             from: m.to,
-            to: p.to,
+            to: p.to
           });
         parts.splice.apply(parts, newParts);
         j += newParts.length - 1;
@@ -5294,7 +5294,7 @@ window.CodeMirror = (function () {
       measure: null,
       measuredSomething: false,
       cm: cm,
-      copyWidgets: copyWidgets,
+      copyWidgets: copyWidgets
     };
     if (line.textClass) builder.pre.className = line.textClass;
 
@@ -5630,7 +5630,7 @@ window.CodeMirror = (function () {
     },
     iterN: function (at, n, op) {
       for (var e = at + n; at < e; ++at) if (op(this.lines[at])) return true;
-    },
+    }
   };
 
   function BranchChunk(children) {
@@ -5736,7 +5736,7 @@ window.CodeMirror = (function () {
           at = 0;
         } else at -= sz;
       }
-    },
+    }
   };
 
   var nextDocId = 0;
@@ -5759,7 +5759,7 @@ window.CodeMirror = (function () {
       anchor: start,
       shift: false,
       extend: false,
-      goalColumn: null,
+      goalColumn: null
     };
     this.id = ++nextDocId;
     this.modeOption = mode;
@@ -5770,12 +5770,12 @@ window.CodeMirror = (function () {
       {
         from: start,
         to: start,
-        text: text,
+        text: text
       },
       null,
       {
         head: start,
-        anchor: start,
+        anchor: start
       }
     );
   });
@@ -5810,11 +5810,11 @@ window.CodeMirror = (function () {
           from: top,
           to: Pos(last, getLine(this, last).text.length),
           text: splitLines(code),
-          origin: 'setValue',
+          origin: 'setValue'
         },
         {
           head: top,
-          anchor: top,
+          anchor: top
         },
         true
       );
@@ -5903,7 +5903,7 @@ window.CodeMirror = (function () {
           from: this.sel.from,
           to: this.sel.to,
           text: splitLines(code),
-          origin: origin,
+          origin: origin
         },
         collapse || 'around'
       );
@@ -5923,7 +5923,7 @@ window.CodeMirror = (function () {
       var hist = this.history;
       return {
         undo: hist.done.length,
-        redo: hist.undone.length,
+        redo: hist.undone.length
       };
     },
     clearHistory: function () {
@@ -5944,7 +5944,7 @@ window.CodeMirror = (function () {
     getHistory: function () {
       return {
         done: copyHistoryArray(this.history.done),
-        undone: copyHistoryArray(this.history.undone),
+        undone: copyHistoryArray(this.history.undone)
       };
     },
     setHistory: function (histData) {
@@ -5959,7 +5959,7 @@ window.CodeMirror = (function () {
     setBookmark: function (pos, options) {
       var realOpts = {
         replacedWith: options && (options.nodeType == null ? options.widget : options),
-        insertLeft: options && options.insertLeft,
+        insertLeft: options && options.insertLeft
       };
       pos = clipPos(this, pos);
       return markText(this, pos, pos, realOpts, 'bookmark');
@@ -6020,7 +6020,7 @@ window.CodeMirror = (function () {
         anchor: this.sel.anchor,
         shift: this.sel.shift,
         extend: false,
-        goalColumn: this.sel.goalColumn,
+        goalColumn: this.sel.goalColumn
       };
       if (copyHistory) {
         doc.history.undoDepth = this.history.undoDepth;
@@ -6039,14 +6039,14 @@ window.CodeMirror = (function () {
       if (options.sharedHist) copy.history = this.history;
       (this.linked || (this.linked = [])).push({
         doc: copy,
-        sharedHist: options.sharedHist,
+        sharedHist: options.sharedHist
       });
       copy.linked = [
         {
           doc: this,
           isParent: true,
-          sharedHist: options.sharedHist,
-        },
+          sharedHist: options.sharedHist
+        }
       ];
       return copy;
     },
@@ -6084,7 +6084,7 @@ window.CodeMirror = (function () {
     },
     getEditor: function () {
       return this.cm;
-    },
+    }
   });
 
   Doc.prototype.eachLine = Doc.prototype.iter;
@@ -6251,7 +6251,7 @@ window.CodeMirror = (function () {
       lastOrigin: null,
       // Used by the isClean() method
       generation: startGen || 1,
-      maxGeneration: startGen || 1,
+      maxGeneration: startGen || 1
     };
   }
 
@@ -6267,12 +6267,12 @@ window.CodeMirror = (function () {
   function historyChangeFromChange(doc, change) {
     var from = {
       line: change.from.line,
-      ch: change.from.ch,
+      ch: change.from.ch
     };
     var histChange = {
       from: from,
       to: changeEnd(change),
-      text: getBetween(doc, change.from, change.to),
+      text: getBetween(doc, change.from, change.to)
     };
     attachLocalSpans(doc, histChange, change.from.line, change.to.line + 1);
     linkedDocs(
@@ -6319,7 +6319,7 @@ window.CodeMirror = (function () {
         anchorBefore: doc.sel.anchor,
         headBefore: doc.sel.head,
         anchorAfter: selAfter.anchor,
-        headAfter: selAfter.head,
+        headAfter: selAfter.head
       };
       hist.done.push(cur);
       hist.generation = ++hist.maxGeneration;
@@ -6359,7 +6359,7 @@ window.CodeMirror = (function () {
         anchorBefore: event.anchorBefore,
         headBefore: event.headBefore,
         anchorAfter: event.anchorAfter,
-        headAfter: event.headAfter,
+        headAfter: event.headAfter
       });
       for (var j = 0; j < changes.length; ++j) {
         var change = changes[j],
@@ -6367,7 +6367,7 @@ window.CodeMirror = (function () {
         newChanges.push({
           from: change.from,
           to: change.to,
-          text: change.text,
+          text: change.text
         });
         if (newGroup)
           for (var prop in change)
@@ -6587,7 +6587,7 @@ window.CodeMirror = (function () {
   var Pass = (CodeMirror.Pass = {
     toString: function () {
       return 'CodeMirror.Pass';
-    },
+    }
   });
 
   function Delayed() {
@@ -6597,7 +6597,7 @@ window.CodeMirror = (function () {
     set: function (ms, f) {
       clearTimeout(this.id);
       this.id = setTimeout(f, ms);
-    },
+    }
   };
 
   // Counts the column offset in a string, taking tabs into account.
@@ -6888,7 +6888,7 @@ window.CodeMirror = (function () {
     63235: 'Right',
     63233: 'Down',
     63302: 'Insert',
-    63272: 'Delete',
+    63272: 'Delete'
   };
   CodeMirror.keyNames = keyNames;
   (function () {
@@ -7165,7 +7165,7 @@ window.CodeMirror = (function () {
           order.push({
             from: start,
             to: i,
-            level: 0,
+            level: 0
           });
         } else {
           var pos = i,
@@ -7177,14 +7177,14 @@ window.CodeMirror = (function () {
                 order.splice(at, 0, {
                   from: pos,
                   to: j,
-                  level: 1,
+                  level: 1
                 });
               var nstart = j;
               for (++j; j < i && countsAsNum.test(types[j]); ++j) {}
               order.splice(at, 0, {
                 from: nstart,
                 to: j,
-                level: 2,
+                level: 2
               });
               pos = j;
             } else ++j;
@@ -7193,7 +7193,7 @@ window.CodeMirror = (function () {
             order.splice(at, 0, {
               from: pos,
               to: i,
-              level: 1,
+              level: 1
             });
         }
       }
@@ -7202,7 +7202,7 @@ window.CodeMirror = (function () {
         order.unshift({
           from: 0,
           to: m[0].length,
-          level: 0,
+          level: 0
         });
       }
       if (lst(order).level == 1 && (m = str.match(/\s+$/))) {
@@ -7210,14 +7210,14 @@ window.CodeMirror = (function () {
         order.push({
           from: len - m[0].length,
           to: len,
-          level: 0,
+          level: 0
         });
       }
       if (order[0].level != lst(order).level)
         order.push({
           from: len,
           to: len,
-          level: order[0].level,
+          level: order[0].level
         });
 
       return order;
@@ -7245,7 +7245,7 @@ CodeMirror.defineMode(
       java: 'text/x-java',
       csharp: 'text/x-csharp',
       'c#': 'text/x-csharp',
-      scala: 'text/x-scala',
+      scala: 'text/x-scala'
     };
 
     var getMode = (function () {
@@ -7264,7 +7264,7 @@ CodeMirror.defineMode(
         if (propertyIsEnumerable(m, CodeMirror.mimeModes))
           mimesList.push({
             mime: m,
-            mode: CodeMirror.mimeModes[m],
+            mode: CodeMirror.mimeModes[m]
           });
       for (i = 0; i < mimesList.length; i++) {
         mime = mimesList[i].mime;
@@ -7669,7 +7669,7 @@ CodeMirror.defineMode(
           strong: false,
           header: false,
           list: false,
-          quote: false,
+          quote: false
         };
       },
 
@@ -7692,7 +7692,7 @@ CodeMirror.defineMode(
           header: s.header,
           list: s.list,
           quote: s.quote,
-          md_inside: s.md_inside,
+          md_inside: s.md_inside
         };
       },
 
@@ -7729,7 +7729,7 @@ CodeMirror.defineMode(
 
       blankLine: blankLine,
 
-      getType: getType,
+      getType: getType
     };
   },
   'xml'
@@ -7798,7 +7798,7 @@ CodeMirror.defineMIME('text/x-markdown', 'markdown');
 // Showdown namespace
 //
 var Showdown = {
-    extensions: {},
+    extensions: {}
   },
   forEach = (Showdown.forEach = function (a, b) {
     if (typeof a.forEach == 'function') a.forEach(b);
@@ -8227,7 +8227,7 @@ var Showdown = {
         },
         function (a) {
           return a;
-        },
+        }
       ];
       return (
         (a = 'mailto:' + a),
@@ -8300,7 +8300,7 @@ var Showdown = {
       editor = CodeMirror.fromTextArea(document.getElementById('entry-markdown'), {
         mode: 'markdown',
         tabMode: 'indent',
-        lineWrapping: true,
+        lineWrapping: true
       });
 
     // Really not the best way to do things as it includes Markdown formatting along with words
@@ -8354,7 +8354,7 @@ var Showdown = {
 
                 // Set image instead of placeholder
                 holderP.removeClass('dropzone').html('<img src="' + response.path + '"/>');
-              },
+              }
             })
             .addClass('dropzone');
         })();

@@ -2,7 +2,6 @@ import path from 'path';
 import multer from 'multer';
 import express from 'express';
 import bodyParser from 'body-parser';
-import { uploadImage } from './lib/uploadImage';
 
 const PORT = process.env.PORT || 3000;
 
@@ -19,11 +18,11 @@ app.post('/upload', upload.single('file'), async (req, res) => {
     if (!file) {
       throw new Error('No file uploaded');
     }
-    const { id, url } = await uploadImage(file);
+    const { id, url } = await import('./lib/uploadImage.js').then(({ uploadImage }) => uploadImage(file));
     res.json({
       id,
       type: 'success',
-      path: url,
+      path: url
     });
   } catch (error) {
     console.error(error);
