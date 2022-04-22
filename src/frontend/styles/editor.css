@@ -393,13 +393,13 @@ tt {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 400;
   height: 40px;
-  padding: 10px 0;
+  padding: 10px;
   text-transform: uppercase;
   color: #aaa9a2;
   background-color: transparent;
@@ -413,4 +413,7 @@ tt {
   );
   background-image: -webkit-linear-gradient(top, #fff 0%, #fff 25%, rgba(255, 255, 255, 0.9) 100%);
   background-image: linear-gradient(to bottom, #fff 0%, #fff 25%, rgba(255, 255, 255, 0.9) 100%);
+
+  display: flex;
+  justify-content: space-between;
 }

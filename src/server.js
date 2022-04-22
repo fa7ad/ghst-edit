@@ -1,16 +1,16 @@
-import path from 'path';
-import multer from 'multer';
-import express from 'express';
-import bodyParser from 'body-parser';
+const path = require('path');
+const multer = require('multer');
+const express = require('express');
+const bodyParser = require('body-parser');
 
-const PORT = process.env.PORT || 3000;
+const { uploadImage } = require('./lib/uploadImage');
 
 const app = express();
 const upload = multer({ storage: multer.memoryStorage() });
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(path.join(process.cwd(), 'public')));
+app.use(express.static(path.join(__dirname, 'frontend')));
 
 app.post('/upload', upload.single('file'), async (req, res) => {
   try {
@@ -18,7 +18,7 @@ app.post('/upload', upload.single('file'), async (req, res) => {
     if (!file) {
       throw new Error('No file uploaded');
     }
-    const { id, url } = await import('./lib/uploadImage.js').then(({ uploadImage }) => uploadImage(file));
+    const { id, url } = await uploadImage(file);
     res.json({
       id,
       type: 'success',
@@ -30,6 +30,4 @@ app.post('/upload', upload.single('file'), async (req, res) => {
   }
 });
 
-app.listen(PORT, () => {
-  console.log(`Server is running on http://0.0.0.0:${PORT}`);
-});
+module.exports = app;

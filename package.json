@@ -1,27 +1,68 @@
 {
   "name": "ghst-edit",
+  "productName": "ghst-edit",
   "version": "1.0.0",
   "description": "Ghost editor... resurrected?",
-  "main": "app.js",
-  "type": "module",
-  "repository": "https://github.com/fa7ad/ghst-edit.git",
-  "author": "Fahad Hossain <setname.fahad AT gmail.com>",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "publish": "electron-forge publish",
+    "lint": "echo \"No linting configured\""
+  },
+  "keywords": [],
+  "author": {
+    "name": "Fahad Hossain",
+    "email": "set.name.fahad@gmail.com"
+  },
   "license": "ISC",
-  "private": true,
+  "repository": "https://github.com/fa7ad/ghst-edit.git",
+  "config": {
+    "forge": {
+      "packagerConfig": {},
+      "makers": [
+        {
+          "name": "@electron-forge/maker-squirrel",
+          "config": {
+            "name": "ghst_edit"
+          }
+        },
+        {
+          "name": "@electron-forge/maker-zip",
+          "platforms": [
+            "darwin"
+          ]
+        },
+        {
+          "name": "@electron-forge/maker-deb",
+          "config": {}
+        },
+        {
+          "name": "@electron-forge/maker-rpm",
+          "config": {}
+        }
+      ]
+    }
+  },
   "dependencies": {
     "body-parser": "^1.19.1",
+    "dotenv": "^16.0.0",
+    "electron-squirrel-startup": "^1.0.0",
     "express": "^4.17.2",
     "formdata-node": "^4.3.2",
+    "get-port": "^6.1.2",
     "got": "^12.0.0",
-    "multer": "^1.4.4",
-    "nodemon": "^2.0.15"
+    "multer": "^1.4.4"
   },
   "devDependencies": {
+    "@electron-forge/cli": "^6.0.0-beta.63",
+    "@electron-forge/maker-deb": "^6.0.0-beta.63",
+    "@electron-forge/maker-rpm": "^6.0.0-beta.63",
+    "@electron-forge/maker-squirrel": "^6.0.0-beta.63",
+    "@electron-forge/maker-zip": "^6.0.0-beta.63",
+    "electron": "18.1.0",
     "eslint": "^8.6.0",
     "prettier": "^2.5.1"
-  },
-  "scripts": {
-    "start": "node app.js",
-    "dev": "nodemon app.js"
   }
 }

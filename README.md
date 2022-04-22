@@ -8,10 +8,12 @@ This is largely based on the works of [@ig3](https://github.com/ig3/ghosditor), 
 
 ## Goals / Roadmap
 
-- [x] Dockerize and simplify the development process
-- [ ] Create a desktop app (electron)
+- [x] ~~Dockerize and simplify the development process~~
+- [x] Create a desktop app (electron)
 - [ ] Add support for saving/opening markdown files
-      ...
+
+  ...
+
 - [ ] (maybe) Try to update the codebase to not rely on jQuery?
 
 ## Run
@@ -24,5 +26,5 @@ This is largely based on the works of [@ig3](https://github.com/ig3/ghosditor), 
   ```
 - Start the application using docker compose
   ```bash
-  docker compose up
+  yarn start
   ```

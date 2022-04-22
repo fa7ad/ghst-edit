@@ -1,13 +1,14 @@
-import got from 'got';
-import { Blob, FormData } from 'formdata-node';
+const { Blob, FormData } = require('formdata-node');
 
 const IMGBB_APIKEY = process.env.IMGBB_APIKEY;
 if (!IMGBB_APIKEY) {
   throw new Error('IMGBB_APIKEY is not set');
 }
 
-export async function uploadImage(file) {
+async function uploadImage(file) {
   const { originalname, buffer } = file;
+
+  const got = await import('got').then(m => m.default);
 
   const formData = new FormData();
   formData.append('image', new Blob([buffer]), originalname);
@@ -23,3 +24,5 @@ export async function uploadImage(file) {
 
   return response.data;
 }
+
+module.exports = { uploadImage };
